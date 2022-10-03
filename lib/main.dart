@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'flutter chat',
       theme: ThemeData(
+          useMaterial3: true,
           primarySwatch: Colors.green,
           buttonTheme: ButtonTheme.of(context).copyWith(
             // buttonColor: Colors.blue,

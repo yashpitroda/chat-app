@@ -1,11 +1,16 @@
+import 'dart:io';
+
+import 'package:chatapp/widgets/auth/image_input.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 enum AuthMode { Signup, Signin }
 
 class AuthForm extends StatefulWidget {
   final Function submitdata;
   final isloading;
-  const AuthForm({super.key, required this.submitdata,required this.isloading});
+  const AuthForm(
+      {super.key, required this.submitdata, required this.isloading});
   @override
   State<AuthForm> createState() => _AuthFormState();
 }
@@ -19,6 +24,14 @@ class _AuthFormState extends State<AuthForm> {
   String _username = '';
 
   bool _isSignIn = false;
+
+  File? _selectedimagefomImageInput;
+  void _selectimageHandler(File pickedImage) {
+    setState(() {
+      _selectedimagefomImageInput = pickedImage;
+    });
+  }
+
   void _switchAuthMode() {
     if (_authMode == AuthMode.Signin) {
       setState(() {
@@ -86,8 +99,8 @@ class _AuthFormState extends State<AuthForm> {
         duration: Duration(milliseconds: 300),
         curve: Curves.fastOutSlowIn,
         height: _authMode == AuthMode.Signup
-            ? MediaQueryhelp.height * 0.36
-            : MediaQueryhelp.height * 0.29,
+            ? MediaQueryhelp.height * 0.55
+            : MediaQueryhelp.height * 0.3,
         child: Card(
             child: SingleChildScrollView(
           child: Form(
@@ -97,6 +110,8 @@ class _AuthFormState extends State<AuthForm> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  if (_authMode == AuthMode.Signup)
+                    ImageInput(onselectImage: _selectimageHandler),
                   TextFormField(
                     key: ValueKey('emailKey'),
                     validator: (value) {
