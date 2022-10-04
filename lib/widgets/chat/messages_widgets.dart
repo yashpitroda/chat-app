@@ -31,6 +31,7 @@ class MassagesWidget extends StatelessWidget {
           itemBuilder: (ctx, index) => MessageBubble(
             chatdocument[index]['text'],
             chatdocument[index]['userName'],
+            chatdocument[index]['userImageUrl'],
             (chatdocument[index]['userId'] == currentUser!.uid),
             key: ValueKey(chatdocument[index].id),
           ),

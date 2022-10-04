@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:chatapp/widgets/auth/image_input.dart';
@@ -68,7 +69,16 @@ class _AuthFormState extends State<AuthForm> {
     final isvalid = _formkey.currentState!.validate();
     FocusScope.of(context)
         .unfocus(); //after tap in to signin botten keybord will close //itt is close the focus form input
-
+    if ((_authMode == AuthMode.Signup) && _selectedimagefomImageInput == null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          duration: Duration(seconds: 2),
+          content: Text(
+            'plea se pick an image',
+            // style: TextStyle(color: Colors.black),
+          ),
+          backgroundColor: Theme.of(context).errorColor));
+      return;
+    }
     if (isvalid) {
       _formkey.currentState!.save();
       // print(_userEmail);
@@ -79,6 +89,7 @@ class _AuthFormState extends State<AuthForm> {
         _userEmail.trim(),
         _username.trim(),
         _userpassword.trim(),
+        _selectedimagefomImageInput,
         _isSignIn,
       );
       //do not need to do this
@@ -177,7 +188,7 @@ class _AuthFormState extends State<AuthForm> {
                           onPressed: _switchAuthMode,
                           child: Text(_authMode == AuthMode.Signin
                               ? 'Signup'
-                              : "Signin"),
+                              : "Signin"), 
                         ),
                       ],
                     ),
