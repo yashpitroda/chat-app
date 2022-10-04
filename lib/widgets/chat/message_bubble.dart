@@ -24,15 +24,35 @@ class MessageBubble extends StatelessWidget {
       children: <Widget>[
         Padding(
           //mrgin
-          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 16),
           child: Stack(
+            clipBehavior: Clip.none,
             children: [
               messageBubbleContainer(
                   isMe: isMe, username: username, message: message),
+              // isMe
+              // ? Positioned(
+              //     left: -15,
+              //     top: -15,
+              //     child: CircleAvatar(
+              //       // backgroundColor : Colors.amber,
+              //       backgroundImage: NetworkImage(userImageUrl),
+              //     ))
+              //     : Positioned(
+              //         top: -15,
+              //         right: -15,
+              //         child: CircleAvatar(
+              //           // backgroundColor: Colors.amber,
+              //           backgroundImage: NetworkImage(userImageUrl),
+              //         )),
               Positioned(
+                  left: isMe ? -15 : null,
+                  right: isMe ? null : -15,
+                  top: -15,
                   child: CircleAvatar(
-                backgroundColor: Colors.amber,
-              )),
+                    // backgroundColor : Colors.amber,
+                    backgroundImage: NetworkImage(userImageUrl),
+                  ))
             ],
           ),
         ),
@@ -75,7 +95,7 @@ class messageBubbleContainer extends StatelessWidget {
       //   horizontal: 8,
       // ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
         child: Column(
           crossAxisAlignment:
               isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
@@ -83,14 +103,14 @@ class messageBubbleContainer extends StatelessWidget {
             Text(
               username,
               style: TextStyle(
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w700,
                 color: isMe ? Colors.white : Colors.black,
               ),
             ),
             Text(
               message,
               style: TextStyle(
-                color: isMe ? Colors.white : Colors.black,
+                color: isMe ? Colors.white70 : Colors.black87,
               ),
               textAlign: isMe ? TextAlign.end : TextAlign.start,
             ),

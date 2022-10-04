@@ -26,6 +26,7 @@ class MassagesWidget extends StatelessWidget {
         //else
         final chatdocument = snapshot.data?.docs;
         return ListView.builder(
+         
           reverse: true, //botton to top
           itemCount: chatdocument!.length,
           itemBuilder: (ctx, index) => MessageBubble(
